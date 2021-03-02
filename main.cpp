@@ -23,12 +23,11 @@ int Cfib(int n)
         return Cfib(n-1)+Cfib(n-2);
 }
 
-int Csquare(int pr[], int length)
+int Csquare(int pr)
 {
-    for (int index = 0; index < length; index++){
-	printf("pr[%d] = %d\n", index, pr[index]*pr[index]);
-    }
-    return 0;
+	pr*=pr;
+
+    return pr;
 }
 
 // Our Python binding to our C function
@@ -42,8 +41,11 @@ static PyObject* square(PyObject* self, PyObject* args)
 
     if(!PyArg_ParseTuple(args, "O", &double_list))
         return NULL;
-    pr_length = PyObject_Length(double_list);
-    if(pr_length < 0)
+    
+	pr_length = PyObject_Length(double_list);
+	PyObject *return_list = PyList_New(pr_length);
+    
+	if(pr_length < 0)
 	return NULL;
     pr = (int *) malloc(sizeof(int *) * pr_length);
     if(pr == NULL)
@@ -56,7 +58,12 @@ static PyObject* square(PyObject* self, PyObject* args)
 	pr[index] = PyFloat_AsDouble(item);
     }
     // return our computed square number
-    return Py_BuildValue("i", Csquare(pr, pr_length));
+	for (int i = 0; i < pr_length; ++i){
+		PyObject* python_int = Py_BuildValue("i", Csquare(pr[i]));
+		PyList_SetItem(return_list, i, python_int);
+	}
+	
+    return return_list;
 }
 
 // Our Python binding to our C function
