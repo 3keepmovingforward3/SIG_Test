@@ -1,8 +1,5 @@
 #include <Python.h>
 
-using namespace std;
-
-
 // Function 1: A simple 'hello world' function
 static PyObject* helloworld(PyObject* self, PyObject* args)
 {
