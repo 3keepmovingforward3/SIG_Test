@@ -1,6 +1,4 @@
 #include <Python.h>
-#include <array>
-#include <iostream>
 
 using namespace std;
 
