@@ -34,15 +34,15 @@ int Csquare(int pr)
 // This will take one and only one non-keyword argument
 static PyObject* square(PyObject* self, PyObject* args)
 {
-    // Integer Objects are implemented as "long" integer objects
-    PyObject *double_list;
+    
+    PyObject *int_list;
     int pr_length;
     int *pr;
 
-    if(!PyArg_ParseTuple(args, "O", &double_list))
+    if(!PyArg_ParseTuple(args, "O", &int_list))
         return NULL;
     
-	pr_length = PyObject_Length(double_list);
+	pr_length = PyObject_Length(int_list);
 	PyObject *return_list = PyList_New(pr_length);
     
 	if(pr_length < 0)
@@ -52,10 +52,10 @@ static PyObject* square(PyObject* self, PyObject* args)
         return NULL;
     for (int index = 0; index < pr_length; index++){
 	PyObject *item;
-	item = PyList_GetItem(double_list, index);
+	item = PyList_GetItem(int_list, index);
 	if(!PyFloat_Check(item))
 	    pr[index] = 0;
-	pr[index] = PyFloat_AsDouble(item);
+	pr[index] = PyFloat_AsDouble(item); // Integer Objects are implemented as "long" integer objects
     }
     // return our computed square number
 	for (int i = 0; i < pr_length; ++i){
