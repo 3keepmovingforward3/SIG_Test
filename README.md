@@ -15,4 +15,3 @@ https://test.pypi.org/project/sigTestC/
 ## Compatibility w/ other OSs  
 Originally built in WSL2, which the packager treated as Linux.
 I used auditwheel to remove the Linux specific C libs.  
-Pypi doesn't allow OS specific wheels, it wants the "many" designation.
