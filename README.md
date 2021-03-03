@@ -12,6 +12,8 @@ I was given the task of creating a CPython module that:
 ## TestPyPi
 https://test.pypi.org/project/sigTestC/
 
-## Compatibility w/ other OSs  
-Originally built in WSL2, which the packager treated as Linux.
-I used auditwheel to remove the Linux specific C libs.  
+## Build platform
+Originally built in WSL2, which the packager treated as Linux.  
+
+## CI using Github Workflows  
+Init commit created to test whether or not my workflow at least starts.
